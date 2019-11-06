@@ -9,7 +9,7 @@
   "author": "",
   "license": "MIT-0",
   "dependencies": {
-    "ask-sdk-core": "^2.7.0",
+    "ask-sdk": "^2.7.0",
     "request": "^2.88.0",
     "xml2js": "^0.4.22"
   }

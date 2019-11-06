@@ -37,6 +37,12 @@ class LambdaStack extends cdk.Stack {
       }
     })
 
+    skillHandler.addPermission('AlexaSkillPermission',{
+      principal: new iam.ServicePrincipal('alexa-appkit.amazon.com'),
+      action: "lambda:InvokeFunction",
+      eventSourceToken: AppConfig.alexaskill.id
+    })
+
     //Outputs
     new cdk.CfnOutput(this,'AlexaSkillLambdaFunctionArn',{
       value: skillHandler.functionArn,
