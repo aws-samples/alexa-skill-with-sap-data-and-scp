@@ -28,6 +28,8 @@ NOTE: In the tutorial above, under Step 3: Allow access to ABAP resources, use U
     3. Map the email ID to an available user ID in the SAP ABAP developer edition using SU01 transaction.
     4. The content under 'Create Destination' is outdated in this blog. Use the steps detailed below instead
 
+* Activate '/sap/bc/soap/rfc' in SICF transaction in SAP application
+
 * Create a destination with name 'sapgwdemo' for the ABAP virtual system in SAP Cloud Platform. See [Managing Destinations](https://help.sap.com/viewer/cca91383641e40ffbe03bdc78f00f681/Cloud/en-US/84e45e071c7646c88027fffc6a7bb787.html) for more more information on how to access the 'Create destination editor' and creating HTTP destinations using the destination editor. 
 
 ### SAP Cloud Platform deployment
@@ -144,16 +146,53 @@ cdk deploy
 * Navigate to 'Invocation', 'Save Mode' and then 'Build Model'
 
 ### Testing
-WIP
+
+* First, test if you are able to able to access the SAP Cloud Platform service using a tool like Postman. For Authentication/Authorization, you can use 'OAuth2.0' type and get an access token. You can use the following fields to generate token
+
+    * Grant Type = Authorization Code
+    * Callback URL = https://www.getpostman.com/oauth2/callback
+    * Auth URL = <url from the XSUAA service> + /oauth/authorize. For e.g. https://yourscpaccount.authentication.us10.hana.ondemand.com/oauth/authorize
+    * Access Token URL = <url from the XSUAA service> + /oauth/authorize. For e.g. https://yourscpaccount.authentication.us10.hana.ondemand.com/oauth/token
+    * Client ID = 'clientid' from your XSUAA service in SAP Cloud Platform
+    * Client Secret = 'clientsecret' from your XSUAA service in SAP Cloud Platform
+    * Client Authentication = Send as Basic Auth Header
+
+* Once you have the token, send a 'GET' call to your SAP Cloud Platform app end point. You can get your end point url by navigating to subaccount -> spaces -> [Your space] -> Applications -> odataproxyapi -> Application Routes. For e.g. https://mycf-odataproxy-api.cfapps.us10.hana.ondemand.com. With this end point URL, you will be calling a backend OData service. If you are using ABAP developer edition, the url path can be /sap/opu/odata/IWBEP/GWSAMPLE_BASIC/BusinessPartnerSet?$format=json. So, the full URL for the postman get request will be something like this - https://mycf-odataproxy-api.cfapps.us10.hana.ondemand.com/sap/opu/odata/IWBEP/GWSAMPLE_BASIC/BusinessPartnerSet?$format=json
+
+* If all works fine, you should get back list of busienss partners as JSON document as response
+
+* Now, test you Alexa skill. Launch https://alexa.amazon.com/ and log in using your Alexa developer account. Then navigate to Skills -> Your Skills -> Dev Skills -> [Your Skill Name; for e.g. solo] -> Enable Skill
+
+* Once skill is enabled, click on Settings -> Link Account -> Log in to SAP Cloud Platform account. This step will link your SAP Cloud Platform account with Alexa skill
+
+* Now, go back to Alexa developer console and test the skill by typing the following commands in the 'Alexa Simulator'
+    * Launch solo (or whatever invocation name you used for your skill)
+    * What is my user ID? (the response should display your SAP user ID if the SSO worked correctly)
+    * 
 
 ### Error Handling
-WIP
+* Check the Lambda logs in case of skill response issues.
 
-## Created Resources
-WIP
+* Check SAP Cloud platform application logs if the lambda is failing with an error response from SAP Cloud Platform
+
+* If you are hitting authorization errors, check if you client ID and secret is correct. If those are correct, increase the tracelevel in SMICM transaction in backend SAP and check if the SSO was successful. Check [this](https://wiki.scn.sap.com/wiki/display/ASJAVA/How+to+troubleshoot+Cloud+Connector+principal+propagation+over+HTTPS) wiki page on how to trouble shoot Cloud connector principal propagation over HTTPs
+
+* Make sure you have activated '/sap/bc/soap/rfc' for the 'What is my user ID?' question to work. 
+
+## Created Resources by CDK/CloudFormation
+* Lambda function for handling Skill request/response and integrating with SAP Cloud Platform
+* A new role for Lambda execution
+* A new Lambda permission for the Alexa Skill
 
 ## Cleanup
-WIP
+* Delete all the AWS resources created
+```bash
+cd aws-sap-alexa-scp/alexa/lambda/
+cdk destroy
+```
+* Log on to SAP Cloud Platform and 'stop' the applications if required or delete them
+
+* Delete the Alexa skill if required
 
 ## License Summary
 This sample code is made available under the MIT-0 license. See the LICENSE file.
