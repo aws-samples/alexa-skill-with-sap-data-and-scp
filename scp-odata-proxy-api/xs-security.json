@@ -1,0 +1,13 @@
+{
+    "xsappname" : "odataproxy",
+    "tenant-mode" : "dedicated",
+    "oauth2-configuration": {
+        "token-validity": 900, 
+        "redirect-uris": [
+            "https://www.getpostman.com/oauth2/callback",
+            "https://pitangui.amazon.com/api/skill/link/**",
+            "https://alexa.amazon.co.jp/api/skill/link/**",
+            "https://layla.amazon.com/api/skill/link/**"
+        ] 
+    }
+}

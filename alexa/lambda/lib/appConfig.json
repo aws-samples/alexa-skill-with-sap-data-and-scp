@@ -1,0 +1,20 @@
+{
+    "env" : {
+        "account" : "967217190592",
+        "region" : "us-east-1"
+    },
+    "stackName" : "awssap-alexascp",
+
+    "scp" : {
+        "odataProxyAPIUrl" : "https://awscf-odataproxy-api.cfapps.us10.hana.ondemand.com"
+    },
+
+    "alexaskill" : {
+        "name" : "solo",
+        "arn": "amzn1.ask.skill.53e0021b-49e3-4909-8cd4-479ef15585f7"
+    },
+    
+    "cfexports":{
+        "AlexaSkillLambdaFunctionArn" : "SkillLambdaFunctionArn"
+    }
+}

@@ -1,0 +1,10 @@
+---
+applications:
+- name: odataproxyapi
+  host: awscf-odataproxy-api
+  path: odataproxyapi
+  memory: 128M
+  services:
+    - odataproxy-uaa
+    - destination-lite
+    - connectivity-lite

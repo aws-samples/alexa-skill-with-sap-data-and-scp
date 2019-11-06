@@ -1,0 +1,134 @@
+{
+    "interactionModel": {
+        "languageModel": {
+            "invocationName": "solo",
+            "intents": [
+                {
+                    "name": "AMAZON.CancelIntent",
+                    "samples": []
+                },
+                {
+                    "name": "AMAZON.HelpIntent",
+                    "samples": []
+                },
+                {
+                    "name": "AMAZON.StopIntent",
+                    "samples": []
+                },
+                {
+                    "name": "AMAZON.NavigateHomeIntent",
+                    "samples": []
+                },
+                {
+                    "name": "GetCustomerCount",
+                    "slots": [],
+                    "samples": [
+                        "What is the number of customers I have",
+                        "How many customers do I have"
+                    ]
+                },
+                {
+                    "name": "CreateContact",
+                    "slots": [
+                        {
+                            "name": "FirstName",
+                            "type": "AMAZON.FirstName"
+                        },
+                        {
+                            "name": "LastName",
+                            "type": "AMAZON.FirstName"
+                        },
+                        {
+                            "name": "Customer",
+                            "type": "AMAZON.PostalAddress"
+                        }
+                    ],
+                    "samples": [
+                        "Add a contact with {FirstName} {LastName} in the account ID {Customer}",
+                        "Add a contact with first name {FirstName} and last name {LastName} in the account ID {Customer}",
+                        "Add a contact with first name {FirstName} and last name {LastName} in the account with ID {Customer}",
+                        "Add a contact",
+                        "Create a contact"
+                    ]
+                },
+                {
+                    "name": "GetUserDetails",
+                    "slots": [],
+                    "samples": [
+                        "Get my user id",
+                        "What is my user Id"
+                    ]
+                }
+            ],
+            "types": []
+        },
+        "dialog": {
+            "intents": [
+                {
+                    "name": "CreateContact",
+                    "confirmationRequired": false,
+                    "prompts": {},
+                    "slots": [
+                        {
+                            "name": "FirstName",
+                            "type": "AMAZON.FirstName",
+                            "confirmationRequired": false,
+                            "elicitationRequired": true,
+                            "prompts": {
+                                "elicitation": "Elicit.Slot.525598253026.45770141604"
+                            }
+                        },
+                        {
+                            "name": "LastName",
+                            "type": "AMAZON.FirstName",
+                            "confirmationRequired": false,
+                            "elicitationRequired": true,
+                            "prompts": {
+                                "elicitation": "Elicit.Slot.525598253026.1292115365729"
+                            }
+                        },
+                        {
+                            "name": "Customer",
+                            "type": "AMAZON.PostalAddress",
+                            "confirmationRequired": false,
+                            "elicitationRequired": true,
+                            "prompts": {
+                                "elicitation": "Elicit.Slot.632024915453.1462455217753"
+                            }
+                        }
+                    ]
+                }
+            ],
+            "delegationStrategy": "ALWAYS"
+        },
+        "prompts": [
+            {
+                "id": "Elicit.Slot.525598253026.45770141604",
+                "variations": [
+                    {
+                        "type": "PlainText",
+                        "value": "What is the first name?"
+                    }
+                ]
+            },
+            {
+                "id": "Elicit.Slot.525598253026.1292115365729",
+                "variations": [
+                    {
+                        "type": "PlainText",
+                        "value": "What is the last name?"
+                    }
+                ]
+            },
+            {
+                "id": "Elicit.Slot.632024915453.1462455217753",
+                "variations": [
+                    {
+                        "type": "PlainText",
+                        "value": "What is the customer ID"
+                    }
+                ]
+            }
+        ]
+    }
+}
