@@ -1,4 +1,4 @@
-## aws-sap-alexa-scp
+## alexa-skill-with-sap-data-and-scp
 
 This is a sample Alexa skill that integrates to a backend SAP application using SAP Cloud Platform and SAP Cloud Connector. This repository contains a sample SAP Cloud Platform (CloudFoundry) app that acts as an API endpoint to access backend SAP developer edition application through cloud connector. The backend SAP application and cloud connector can be in your on-premise or hosted on Amazon EC2 instances. SAP Cloud platform account can be in any region where CloudFoundry environment is supported.
 
