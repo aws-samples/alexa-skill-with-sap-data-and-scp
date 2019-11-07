@@ -196,5 +196,5 @@ cdk destroy
 
 * Delete the Alexa skill if required
 
-## License Summary
-This sample code is made available under the MIT-0 license. See the LICENSE file.
+## License
+This project is licensed under the Apache-2.0 License.
