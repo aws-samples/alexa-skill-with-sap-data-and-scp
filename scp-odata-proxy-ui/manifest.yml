@@ -1,0 +1,9 @@
+---
+applications:
+- name: odataproxyui
+  host: awscf-odataproxy-ui
+  path: odataproxyui
+  memory: 128M
+services:
+    - odataproxy-uaa
+    - destination-lite

@@ -83,7 +83,7 @@ async function proxyToBackend(req, res, debug) {
 
     // This is a special header for passing the UAA access token which contains the user details. This is inturn used by principal propogation in cloud connector
     options.headers['SAP-Connectivity-Authentication'] = uaaToken
-    options.headers['SAP-Connectivity-ConsumerAccount'] = "aa47b9f4-14d0-462e-aa9e-a18512d36b6c"
+    //options.headers['SAP-Connectivity-ConsumerAccount'] = "xxxxxx"
     // This is a special header for passing the connectivity service access token to tunnel the http connection through connectivity service
     options.headers['Proxy-Authorization'] = 'Bearer ' + connToken
     

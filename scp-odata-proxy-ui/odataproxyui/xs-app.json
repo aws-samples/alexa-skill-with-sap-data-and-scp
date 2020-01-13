@@ -1,0 +1,9 @@
+{
+    "routes": [
+        {
+            "source": "^/(.*)$",
+            "target": "$1",
+            "destination": "odataproxy-api"
+        }
+    ]
+}
